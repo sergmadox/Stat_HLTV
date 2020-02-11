@@ -74,10 +74,14 @@ def main(urls):
 
 #Делаем запрос на таблицу игрков
 def get_html(url):
+    import cfscrape
     r = requests.Session()
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
-    res = r.get(url, headers=headers)
-    return res.text
+    cookies={
+        'hash':'61a4fe9c1ee03626bf7c5c6e61241355'
+    }
+    scraper = cfscrape.create_scraper(sess=r, headers=headers)
+    return scraper.get(url).content
 
 #Получаем список игроков и персональный url на их страницу со статистикой
 def get_info(url):

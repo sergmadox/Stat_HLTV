@@ -1,5 +1,6 @@
 beautifulsoup4==4.8.2
 certifi==2019.11.28
+cfscrape==2.0.8
 chardet==3.0.4
 idna==2.8
 requests==2.22.0
