@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import os
 import threading
 from queue import Queue
 from os import path
@@ -36,7 +35,6 @@ class Downloader(threading.Thread):
         name_player = pattern.search(url)
         data.append(['Player', name_player[0]])
         info_page = get_html(url)
-        print (info_page)
         soup = BeautifulSoup(info_page, "html.parser")
         table = soup.find('div', attrs={'class': 'statistics'}).find_all('div', class_='stats-row')
 
@@ -59,7 +57,7 @@ def main(urls):
     queue = Queue()
 
     # Запускаем потом и очередь
-    for i in range(5):
+    for i in range(2):
         t = Downloader(queue)
         t.setDaemon(True)
         t.start()
@@ -80,7 +78,7 @@ def get_html(url):
     cookies={
         'hash':'61a4fe9c1ee03626bf7c5c6e61241355'
     }
-    scraper = cfscrape.create_scraper(sess=r, headers=headers)
+    scraper = cfscrape.create_scraper(headers=headers)
     return scraper.get(url).content
 
 #Получаем список игроков и персональный url на их страницу со статистикой
